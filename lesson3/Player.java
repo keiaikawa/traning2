@@ -22,6 +22,16 @@ public class Player {
 	//--------------------------------------
     //プレイヤークラスの操作
 	//---------------------------------------
+
+	/**
+	 * プレイヤークラスのコンストラクタ
+	 * @param name 名前
+	 */
+
+	public Player(String name)
+	{
+		this.name_=name;
+	}
 	/**
 	 * ジャンケンの手を出す。
 	 *
@@ -73,6 +83,11 @@ public class Player {
 	 */
 	public int getWinCount() {
 		return winCount_;
+	}
+
+	public String getName()
+	{
+		return name_;
 	}
 
 }

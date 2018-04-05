@@ -54,7 +54,7 @@ public class Judge {
 
 		if(finalWinner != null)
 		{
-			System,out.println(finalWinner.getname()+"の勝ちです!\n");
+			System.out.println(finalWinner.getName()+"の勝ちです!\n");
 		}
 		else
 		{
@@ -71,12 +71,14 @@ public class Judge {
 	 *
 	 */
 
-		private player judgeJanken(Player player1,Player player2)
+		private Player judgeJanken(Player player1,Player player2)
 		{
 			Player winner = null;
 
 			//①
+			int player1hand = player1.showHand();
 			//②
+			int player2hand = player2.showHand();
 
 			//それぞれの手を表示する
 			printHand(player1hand);
@@ -92,58 +94,76 @@ public class Judge {
 				winner=player1;
 			}
 			//プレイヤー２が勝つ場合
-			else if()
-
-
-
-
-
-
-
-
-
-
-
-			int player1hand = player1.showHand();
-			int player2hand = player2.showHand();
-
-			if(player1WinCount>player2WinCount)
+			else if(
+					(player1hand == Player.STONE && player2hand == Player.PAPER)
+					|| (player1hand == Player.SCISSORS && player2hand == Player.STONE)
+					|| (player1hand == Player.PAPER)
+					   && player2hand == Player.SCISSORS)
 			{
-				//プレイヤー１の勝ち
-				winner = player1;
-			}
-			else if(player1WinCount<player2WinCount)
-			{
-				//プレイヤー２の勝ち
 				winner = player2;
 			}
-			//どちらでもない場合は引き分け(nullを返す)
+
+
+//どちらでもない場合は引き分け
 
 			return winner;
 		}
-		/**
-		 * ジャンケンの手を表示する。
-		 *
-		 * @param hand ジャンケンの手
-		 */
-		private void printHand(int hand)
+
+/**
+ *
+ * 最終的な勝者を判定する。
+ * @param player1 判定対象プレイヤー１
+ * @param player2 判定対象プレイヤー２
+ * @return 勝ったプレイヤー。引き分けの場合はnullを返す
+ */
+
+private Player judgeFinalWinner(Player player1,Player player2)
+{
+	Player winner = null;
+
+	//④
+	int player1WinCount = player1.getWinCount();
+	//⑤
+	int player2WinCount = player2.getWinCount();
+
+
+	if(player1WinCount>player2WinCount)
+	{
+		//プレイヤー１の勝ち
+		winner = player1;
+	}
+	else if(player1WinCount<player2WinCount)
+	{
+		//プレイヤー２の勝ち
+		winner = player2;
+	}
+	//どちらでもない場合は引き分け(nullを返す)
+
+		return winner;
+	}
+	/**
+	 * ジャンケンの手を表示する。
+	 *
+	 * @param hand ジャンケンの手
+	 */
+	private void printHand(int hand)
+	{
+		switch (hand)
 		{
-			switch (hand)
-			{
-			case Player.STONE:
-			   System.out.print("グー");
-			   break;
+		case Player.STONE:
+		   System.out.print("グー");
+		   break;
 
-			case Player.SCISSORS:
-			   System.out.print("チョキ");
-			   break;
+		case Player.SCISSORS:
+		   System.out.print("チョキ");
+		   break;
 
-			case Player.PAPER :
-				System.out.print("パー");
-				break;
+		case Player.PAPER :
+			System.out.print("パー");
+			break;
 
-			default:
-				break;
-			}
+		default:
+			break;
 		}
+	}
 }
